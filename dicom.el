@@ -6,7 +6,7 @@
 ;; Maintainer: Daniel Mendler <mail@daniel-mendler.de>
 ;; Created: 2024
 ;; Version: 1.3
-;; Package-Requires: ((emacs "29.1") (compat "30"))
+;; Package-Requires: ((emacs "29.1") (compat "31"))
 ;; URL: https://github.com/minad/dicom
 ;; Keywords: multimedia, hypermedia, files
 
@@ -589,13 +589,13 @@ The command is specified as FMT string with ARGS."
                          (point) 'dicom--file nil (point-max))))
           (goto-char pt)
           (when (or (eobp) (get-text-property pt 'dicom--file))
-            (cl-decf n)))
+            (decf n)))
       (while-let (((< n 0))
                   (pt (previous-single-property-change
                        (point) 'dicom--file nil (point-min))))
         (goto-char pt)
         (when (or (bobp) (get-text-property pt 'dicom--file))
-          (cl-incf n))))
+          (incf n))))
     (when-let* ((win (get-buffer-window)))
       (set-window-point win (point)))
     (dicom-open
